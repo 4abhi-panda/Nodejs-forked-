@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Home</title>
+    <style>
+        .custom-bg{
+            background: linear-gradient(2deg, #4ff1efab, #ffbb00bd);
+        }
+        .border-right-3{
+            border-right: 3px solid white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card mx-auto">
+            <div class="card-body row">
+                <div class="col-md-6 row mx-auto mt-5 custom-bg rounded p-4 d-flex">
+                    <div class="col-md-4 mx-auto">
+                        <img src="https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_2-512.png" class="img-fluid" >
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <p class="text-dark">{{city}},{{country}}</p> 
+                        </div>
+                        <small class="text-muted"></small> 
+                        <p class="text-muted">Temperature: {{ temperature }}&#8451;</p> 
+                        <small class="text-muted">MIN {{tempMin}}&#8451; | MAX {{tempMin}}&#8451;</small> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var currentDate = new Date();
+        //getWeekday
+        var weekDay = new Array(7);
+        weekDay[0] = "Sunday";
+        weekDay[1] = "Monday";
+        weekDay[2] = "Tuesday";
+        weekDay[3] = "Wednesday";
+        weekDay[4] = "Thursday";
+        weekDay[5] = "Friday";
+        weekDay[6] = "Saturday";
+       var getDay = weekDay[currentDate.getDay()];
+       //getMonth
+        var monthArr = [
+            'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'
+        ];
+        var getMonth = monthArr[currentDate.getMonth()];
+        //getFullYear
+        var getFullYear = currentDate.getFullYear();
+        // Get the hours (12-hour format)
+        var hours = currentDate.getHours() % 12 || 12;
+        // Get the minutes
+        var minutes = currentDate.getMinutes();
+        // Get AM or PM
+        var amOrPm = currentDate.getHours() < 12 ? 'AM' : 'PM';
+        //getCurrentTime
+        var getCurrentTime = `${hours}:${minutes} ${amOrPm}`;
+        // replace("getCurrentTime",getCurrentTime);
+
+    </script>
+</body>
+</html>

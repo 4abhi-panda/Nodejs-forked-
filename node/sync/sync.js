@@ -2,24 +2,24 @@
 // const path = require('path'); // Require the 'path' module
 // const fsExtra = require('fs-extra');
 // try{
-    //sync type ie first sync work then other 
-    // const readFile = fs.readFileSync('../rename.txt','utf-8');
-    // console.log(readFile);
-    // console.log("Print this after read File");
+//sync type ie first sync work then other
+// const readFile = fs.readFileSync('../rename.txt','utf-8');
+// console.log(readFile);
+// console.log("Print this after read File");
 
-    //Async type
-    // const aSync = fs.readFile("../rename.txt","utf-8",(err, data) => {
-    //     let x = 10;
-    //     // while (x <= 20) {
-    //     //     console.log("X is", x++);
-    //     // }
-    //     if(err){
-    //         console.log(err);
-    //     }else{
-    //         console.log(data);
-    //     }
-    //     console.log("Async this");
-    // });
+//Async type
+// const aSync = fs.readFile("../rename.txt","utf-8",(err, data) => {
+//     let x = 10;
+//     // while (x <= 20) {
+//     //     console.log("X is", x++);
+//     // }
+//     if(err){
+//         console.log(err);
+//     }else{
+//         console.log(data);
+//     }
+//     console.log("Async this");
+// });
 
 //     const folderPath = 'chl'
 //     const filePath = 'bio.txt'
@@ -40,13 +40,13 @@
 //                         }else{
 //                             console.log(`Successfully append the data or content in file`);
 //                             // Read the contents of the folder
-//                             const files = fs.readdirSync(folderPath); 
+//                             const files = fs.readdirSync(folderPath);
 //                             files.forEach((file) => {
 //                                 const filePaths = path.join(folderPath, file);
 //                                 fs.unlinkSync(filePaths);
 //                                 console.log(`file: ${filePaths}`);
 //                             });
-//                             // removeSync is remove empty folder 
+//                             // removeSync is remove empty folder
 //                             try {
 //                                 fsExtra.removeSync(folderPath);
 //                                 console.log(`Folder "${folderPath}" and its contents have been deleted.`);
@@ -60,7 +60,7 @@
 //     } catch(error) {
 //         console.log(error);
 //     }
-    
+
 // } catch (error) {
 //     console.log(error);
 // }
