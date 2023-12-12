@@ -1,35 +1,52 @@
+//create weather card using weatherApi
 const http = require("http");
 const fs = require("fs");
 const axios = require("axios");
+const url = require("url");
 
-const apiUrl = () => {
-  return "https://api.openweathermap.org/data/2.5/weather?q=pune&appid=4dce5df2cb005cb6de4e85762fd80b37";
-};
+const apiKey = "4dce5df2cb005cb6de4e85762fd80b37";
 
-// Define headers
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
 const headers = {
   "Content-Type": "text/html",
 };
 
 const htmlFile = fs.readFileSync("index.html", "utf8");
+
+const replaceVariables = (html, replacements) => {
+  let resultHtml = html;
+  for (const [placeholder, value] of Object.entries(replacements)) {
+    const regex = new RegExp(`{{ ${placeholder} }}`, "g");
+    // console.log(regex, value);
+    resultHtml = resultHtml.replace(regex, value);
+  }
+  return resultHtml;
+};
+
 const server = http.createServer((req, res) => {
-  // Make a GET request with headers
+  const queryParameters = url.parse(req.url, true).query;
+  const cityName = queryParameters.q || "pune"; // Default to "pune" if q parameter is not provided
+  //just type in url apiUrl?q=CityName, like this
+  const dynamicApiUrl = `${apiUrl}?q=${cityName}&appid=${apiKey}`;
+
   axios
-    .get(apiUrl(), { headers })
+    .get(dynamicApiUrl, { headers })
     .then((response) => {
-      const temperature = response.data.main.temp || "No data found";
-      console.log(response.data.main.temp || "No data found");
+      const weatherData = response.data.main || {};
+      const temperature = weatherData.temp || "No data found";
+      const tempMin = weatherData.temp_min || "No data found";
+      const tempMax = weatherData.temp_max || "No data found";
 
-      // Replace a placeholder in the HTML with the dynamic data
-      const dynamicHtml = htmlFile.replace("{{ temperature }}", temperature);
+      const dynamicHtml = replaceVariables(htmlFile, {
+        temperature,
+        tempMin,
+        tempMax,
+        city: response.data.name || "Not found",
+        country: response.data.sys.country || "Not found",
+      });
 
-      // Set the response content type to text/html
       res.writeHead(200, { "Content-Type": "text/html" });
-
-      // Send the rendered HTML to the client
       res.write(dynamicHtml);
-
-      // End the response
       res.end();
     })
     .catch((error) => {
